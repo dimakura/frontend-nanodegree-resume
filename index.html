@@ -78,6 +78,23 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
   <script src="js/resumeBuilder.js"></script>
 
   <script type="text/javascript">
+    var dataSubstitution = function(sourceString, value) {
+      return sourceString.replace('%data%', value);
+    };
+
+    var dataSubstitutions = function(mappings) {
+      var result = [];
+      for (var i = 0; i < mappings.length; i++) {
+        var m = mappings[i];
+        if (typeof m === 'string') {
+          result.push( m );
+        } else {
+          result.push( dataSubstitution(m[0], m[1]) );
+        }
+      }
+      return result.join(' ');
+    };
+
     var bio = {
       "name": "Dimitri Kurashvili",
       "role": "Front-End Web Developer",
@@ -91,29 +108,34 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
       "welcomeMessage": "Welcome to my personal page!",
       "skills": ["RubyOnRails","JavaScript","HTML","CSS","Java"],
       "biopic": "https://avatars1.githubusercontent.com/u/321926",
-      "display": function() {
-        var bio = this;
-        var contacts = bio.contacts;
-        var headerHTML = [
-          HTMLheaderName.replace('%data%', bio.name),
-          HTMLheaderRole.replace('%data%', bio.role)
-        ].join(' ');
-        var contactsHTML = [
-          HTMLmobile.replace('%data%', contacts.mobile),
-          HTMLemail.replace('%data%', contacts.email),
-          HTMLgithub.replace('%data%', contacts.github),
-          HTMLtwitter.replace('%data%', contacts.twitter),
-          HTMLlocation.replace('%data%', contacts.location)
-        ].join(' ');
-        var welcomeAndSkillsHTML = [
-          HTMLbioPic.replace('%data%', bio.biopic),
-          HTMLWelcomeMsg.replace('%data%', bio.welcomeMessage),
-          HTMLskillsStart,
-          bio.skills.map(function(skill){ return HTMLskills.replace('%data%', skill); }).join(' ')
-        ].join(' ');
+      display: function() {
+        var contacts = this.contacts;
+
+        var headerHTML = dataSubstitutions([
+            [HTMLheaderName, this.name],
+            [HTMLheaderRole, this.role],
+        ]);
+
+        var contactsHTML = dataSubstitutions([
+          [HTMLmobile, contacts.mobile],
+          [HTMLemail, contacts.email],
+          [HTMLgithub, contacts.github],
+          [HTMLtwitter, contacts.twitter],
+          [HTMLlocation, contacts.location],
+        ]);
+
+        var welcomeHTML = dataSubstitutions([
+          [HTMLbioPic, this.biopic],
+          [HTMLWelcomeMsg, this.welcomeMessage],
+          HTMLskillsStart
+        ]);
+
+        var skillsHTML = dataSubstitutions( this.skills.map(function(skill) { return [HTMLskills,skill]; }) );
+
         $('#header').prepend( $(headerHTML) );
         $('#topContacts').append( $(contactsHTML) );
-        $('#header').append( $(welcomeAndSkillsHTML) );
+        $('#header').append( $(welcomeHTML) );
+        $('#header').append( $(skillsHTML) );
       }
     };
 
