@@ -106,7 +106,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
         "location": "Tbilisi, Georgia"
       },
       "welcomeMessage": "Welcome to my personal page!",
-      "skills": ["RubyOnRails","JavaScript","HTML","CSS","Java"],
+      "skills": ["JavaScript","RubyOnRails","HTML","CSS"],
       "biopic": "https://avatars1.githubusercontent.com/u/321926",
       display: function() {
         var contacts = this.contacts;
@@ -148,21 +148,18 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
         "description": "This is my current job"
       }],
       "display": function() {
-        var $job
-          , job
-          , jobHTML
-          ;
+        var $job, job, jobHTML;
 
         for(var i = 0; i < this.jobs.length; i++) {
           job = this.jobs[i];
           $job = $( HTMLworkStart );
-          jobHTML = [
-            HTMLworkEmployer.replace('%data%', job.employer),
-            HTMLworkTitle.replace('%data%', job.title),
-            HTMLworkDates.replace('%data%', job.dates),
-            HTMLworkLocation.replace('%data%', job.location),
-            HTMLworkDescription.replace('%data%', job.description)
-          ].join(' ');
+          jobHTML = dataSubstitutions([
+            [HTMLworkEmployer, job.employer],
+            [HTMLworkTitle, job.title],
+            [HTMLworkDates, job.dates],
+            [HTMLworkLocation, job.location],
+            [HTMLworkDescription, job.description],
+          ]);
           $job.append( $(jobHTML) );
           $('#workExperience').append( $job );
         }
@@ -201,13 +198,13 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
         for(i = 0; i < schools.length; i++) {
           school = schools[i];
           $school = $(HTMLschoolStart);
-          schoolHTML = [
-            HTMLschoolName.replace('%data%', school.name),
-            HTMLschoolDegree.replace('%data%', school.degree),
-            HTMLschoolDates.replace('%data%', school.dates),
-            HTMLschoolLocation.replace('%data%', school.location),
-            HTMLschoolMajor.replace('%data%', school.majors.join())
-          ].join(' ');
+          schoolHTML = dataSubstitutions([
+            [HTMLschoolName, school.name],
+            [HTMLschoolDegree, school.degree],
+            [HTMLschoolDates, school.dates],
+            [HTMLschoolLocation, school.location],
+            [HTMLschoolMajor, school.majors.join()],
+          ]);
           $school.html( schoolHTML );
           $('#education').append( $school );
         }
@@ -216,12 +213,12 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
         for(i = 0; i < courses.length; i++) {
           school = courses[i];
           $school = $(HTMLschoolStart);
-          schoolHTML = [
-            HTMLonlineTitle.replace('%data%', school.title),
-            HTMLonlineSchool.replace('%data%', school.school),
-            HTMLonlineDates.replace('%data%', school.date),
-            HTMLonlineURL.replace('%data%', school.url)
-          ].join(' ');
+          schoolHTML = dataSubstitutions([
+            [HTMLonlineTitle, school.title],
+            [HTMLonlineSchool, school.school],
+            [HTMLonlineDates, school.date],
+            [HTMLonlineURL, school.url],
+          ]);
           $school.html( schoolHTML );
           $('#education').append( $school );
         }
