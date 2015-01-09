@@ -117,41 +117,97 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
       }
     };
 
+    var work = {
+      "jobs": [{
+        "employer": "JSC Telasi",
+        "title": "Software Developer",
+        "location": "Tbilisi, Georgia",
+        "dates": "June 2005 - Present",
+        "description": "This is my current job"
+      }],
+      "display": function() {
+        var $job
+          , job
+          , jobHTML
+          ;
+
+        for(var i = 0; i < this.jobs.length; i++) {
+          job = this.jobs[i];
+          $job = $( HTMLworkStart );
+          jobHTML = [
+            HTMLworkEmployer.replace('%data%', job.employer),
+            HTMLworkTitle.replace('%data%', job.title),
+            HTMLworkDates.replace('%data%', job.dates),
+            HTMLworkLocation.replace('%data%', job.location),
+            HTMLworkDescription.replace('%data%', job.description)
+          ].join(' ');
+          $job.append( $(jobHTML) );
+          $('#workExperience').append( $job );
+        }
+      }
+    };
+
     var education = {
       "schools": [{
         "name": "Tbilsi State University",
         "location": "Tbilisi, Georgia",
         "degree": "Bachelor",
         "majors": ["Physics"],
-        "dates": 200005,
+        "dates": 2000,
         "url": "http://tsu.edu.ge"
       }, {
         "name": "High Energy Physics Institute",
         "location": "Tbilisi, Georgia",
         "degree": "Masters",
         "majors": ["Physics"],
-        "dates": 200205,
+        "dates": 2002,
         "url": "http://hepi.edu.ge"
       }],
       "onlineCourses": [{
         "title": "Front-End Web Developer Nano Degree",
         "school": "Udacity",
-        "date": 201502,
+        "date": 2015,
         "url": "http://udacity.com/course/nd001"
       }],
       "display": function() {
-        var education = this;
-        var schools = education.schools;
-        var courses = education.onlineCourses;
+        var education = this
+          , schools = education.schools
+          , courses = education.onlineCourses
+          , schoolHTML, school, $school
+          , i;
 
-        for(var i = 0; i < schools.length; i++) {
-          var school = schools[i];
-          // TODO: display school
+        for(i = 0; i < schools.length; i++) {
+          school = schools[i];
+          $school = $(HTMLschoolStart);
+          schoolHTML = [
+            HTMLschoolName.replace('%data%', school.name),
+            HTMLschoolDegree.replace('%data%', school.degree),
+            HTMLschoolDates.replace('%data%', school.dates),
+            HTMLschoolLocation.replace('%data%', school.location),
+            HTMLschoolMajor.replace('%data%', school.majors.join())
+          ].join(' ');
+          $school.html( schoolHTML );
+          $('#education').append( $school );
+        }
+
+        $('#education').append( $(HTMLonlineClasses) );
+        for(i = 0; i < courses.length; i++) {
+          school = courses[i];
+          $school = $(HTMLschoolStart);
+          schoolHTML = [
+            HTMLonlineTitle.replace('%data%', school.title),
+            HTMLonlineSchool.replace('%data%', school.school),
+            HTMLonlineDates.replace('%data%', school.date),
+            HTMLonlineURL.replace('%data%', school.url)
+          ].join(' ');
+          $school.html( schoolHTML );
+          $('#education').append( $school );
         }
       }
     };
 
     bio.display();
+    work.display();
     education.display();
   </script>
 </body>
