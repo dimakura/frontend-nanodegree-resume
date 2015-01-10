@@ -166,6 +166,20 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
       }
     };
 
+    var projects = {
+      "projects": [{
+        "title": "my.telasi.ge",
+        "dates": "2014",
+        "description": "JSC Telasi Customer Portal",
+        "images": [ "image/mytelasi01.png" ]
+      }],
+      display: function() {
+        // TODO:
+
+        $('#projects').append();
+      }
+    };
+
     var education = {
       "schools": [{
         "name": "Tbilsi State University",
@@ -227,6 +241,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
 
     bio.display();
     work.display();
+    projects.display();
     education.display();
   </script>
 </body>
