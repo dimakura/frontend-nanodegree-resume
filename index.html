@@ -96,18 +96,18 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     };
 
     var bio = {
-      "name": "Dimitri Kurashvili",
-      "role": "Front-End Web Developer",
-      "contacts": {
-        "mobile": "(+995)555116776",
-        "email": "dimakura@gmail.com",
-        "github": "dimakura",
-        "twitter": "dimakura",
-        "location": "Tbilisi, Georgia"
+      name: "Dimitri Kurashvili",
+      role: "Front-End Web Developer",
+      contacts: {
+        mobile: '(+995)555116776',
+        email: 'dimakura@gmail.com',
+        github: 'dimakura',
+        twitter: 'dimakura',
+        location: 'Tbilisi, Georgia'
       },
-      "welcomeMessage": "Welcome to my personal page!",
-      "skills": ["JavaScript","RubyOnRails","HTML","CSS"],
-      "biopic": "https://avatars1.githubusercontent.com/u/321926",
+      welcomeMessage: 'Welcome to my personal page!',
+      skills: ['JavaScript','RubyOnRails','HTML','CSS'],
+      biopic: 'https://avatars1.githubusercontent.com/u/321926',
       display: function() {
         var contacts = this.contacts;
 
@@ -141,12 +141,12 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     };
 
     var work = {
-      "jobs": [{
-        "employer": "JSC Telasi",
-        "title": "Software Developer",
-        "location": "Tbilisi, Georgia",
-        "dates": "June 2005 - Present",
-        "description": "This is my current job"
+      jobs: [{
+        employer: 'JSC Telasi',
+        title: 'Software Developer',
+        location: 'Tbilisi, Georgia',
+        dates: 'June 2005 - Present',
+        description: 'This is my current job'
       }],
       "display": function() {
         var $job, job, jobHTML;
@@ -168,11 +168,11 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     };
 
     var projects = {
-      "projects": [{
-        "title": "my.telasi.ge",
-        "dates": "2014",
-        "description": "JSC Telasi Customer Portal",
-        "images": [ "images/mytelasi01.png" ]
+      projects: [{
+        title: 'my.telasi.ge',
+        dates: '2014',
+        description: 'JSC Telasi Customer Portal',
+        images: [ 'images/mytelasi01.png' ]
       }],
       display: function() {
         var $project, project, projectHTML;
@@ -193,28 +193,28 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     };
 
     var education = {
-      "schools": [{
-        "name": "Tbilsi State University",
-        "location": "Tbilisi, Georgia",
-        "degree": "Bachelor",
-        "majors": ["Physics"],
-        "dates": 2000,
-        "url": "http://tsu.edu.ge"
+      schools: [{
+        name: 'Tbilsi State University',
+        location: 'Tbilisi, Georgia',
+        degree: 'Bachelor',
+        majors: [ 'Physics' ],
+        dates: 2000,
+        url: 'http://tsu.edu.ge'
       }, {
-        "name": "High Energy Physics Institute",
-        "location": "Abasha, Georgia",
-        "degree": "Masters",
-        "majors": ["Physics"],
-        "dates": 2002,
-        "url": "http://hepi.edu.ge"
+        name: 'High Energy Physics Institute',
+        location: 'Abasha, Georgia',
+        degree: 'Masters',
+        majors: [ 'Physics' ],
+        dates: 2002,
+        url: 'http://hepi.edu.ge'
       }],
-      "onlineCourses": [{
-        "title": "Front-End Web Developer Nano Degree",
-        "school": "Udacity",
-        "date": 2015,
-        "url": "http://udacity.com/course/nd001"
+      onlineCourses: [{
+        title: 'Front-End Web Developer Nano Degree',
+        school: 'Udacity',
+        date: 2015,
+        url: 'http://udacity.com/course/nd001'
       }],
-      "display": function() {
+      display: function() {
         var education = this
           , schools = education.schools
           , courses = education.onlineCourses
