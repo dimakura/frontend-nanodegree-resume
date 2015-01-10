@@ -46,7 +46,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
   Uncomment the <script> tag below when you're ready to add an interactive
   Google Map to your resume!
   -->
-  <!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script> -->
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
   <meta name="viewport" content="width=device-width">
 </head>
@@ -134,6 +134,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
 
         $('#header').prepend( $(headerHTML) );
         $('#topContacts').append( $(contactsHTML) );
+        $('#footerContacts').append( $(contactsHTML) );
         $('#header').append( $(welcomeHTML) );
         $('#header').append( $(skillsHTML) );
       }
@@ -171,12 +172,23 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
         "title": "my.telasi.ge",
         "dates": "2014",
         "description": "JSC Telasi Customer Portal",
-        "images": [ "image/mytelasi01.png" ]
+        "images": [ "images/mytelasi01.png" ]
       }],
       display: function() {
-        // TODO:
-
-        $('#projects').append();
+        var $project, project, projectHTML;
+        for(var i = 0; i < this.projects.length; i++) {
+          project = this.projects[i];
+          $project = $( HTMLprojectStart );
+          projectHTML = dataSubstitutions([
+            [HTMLprojectTitle, project.title],
+            [HTMLprojectDates, project.dates],
+            [HTMLprojectDescription, project.description],
+          ]);
+          imagesHTML = dataSubstitutions( project.images.map(function(img) { return [HTMLprojectImage, img] }) );
+          $project.append( $(projectHTML + imagesHTML) );
+          $project.append( $() );
+          $('#projects').append( $project );
+        }
       }
     };
 
@@ -190,7 +202,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
         "url": "http://tsu.edu.ge"
       }, {
         "name": "High Energy Physics Institute",
-        "location": "Tbilisi, Georgia",
+        "location": "Abasha, Georgia",
         "degree": "Masters",
         "majors": ["Physics"],
         "dates": 2002,
@@ -243,6 +255,9 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     work.display();
     projects.display();
     education.display();
+
+    $('#mapDiv').append( googleMap );
+    initializeMap();
   </script>
 </body>
 </html>

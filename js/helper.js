@@ -65,7 +65,7 @@ The International Name challenge in Lesson 2 where you'll create a function that
 $(document).ready(function() {
   $('button').click(function() {
     var iName = inName() || function(){};
-    $('#name').html(iName);  
+    $('#name').html(iName);
   });
 });
 
@@ -171,6 +171,34 @@ function initializeMap() {
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+
+      if ( !marker.infowindow ) {
+        var location = this.getTitle();
+
+        var places = [ '<h3>' + location + '</h3>' ];
+
+        if (bio.contacts.location === location) {
+          places.push('<p>I live here!</p>');
+        }
+
+        var schoolsHere = education.schools.filter(function(school) { return school.location === location; });
+        if( schoolsHere.length > 0 ) {
+          places.push( '<h4>Schools</h4>' );
+          places.push(schoolsHere.map(function(school){ return '<p>'+school.name+'</p>' }).join(' '));
+        }
+
+        var jobsHere = work.jobs.filter(function(job) { return job.location === location; });
+        if ( jobsHere.length > 0 ) {
+          places.push( '<h4>Jobs</h4>' );
+          places.push(jobsHere.map(function(job){ return '<p>'+job.title+'</p>' }).join(' '));
+        }
+
+        marker.infowindow = new google.maps.InfoWindow({
+          content: places.join(' ')
+        });
+      }
+
+      marker.infowindow.open(map, marker);
     });
 
     // this is where the pin actually gets added to the map.
